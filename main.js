@@ -16,9 +16,7 @@ let theGrid = makeGrid(); // an array of board positions
 assignBombs(theGrid);
 assignNb(theGrid)
 console.log(actualizeGrid(theGrid));
-
 promptUser();
-
 
 
 function promptUser() {
