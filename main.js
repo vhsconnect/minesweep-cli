@@ -1,20 +1,24 @@
+#!/usr/bin/env node
+
 /*
 Welcome to minesweep, a CLI based adventure based on the Windows 98 game.
 */
 
 const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 let turnCount = 0
 let theGrid = makeGrid(); // an array of board positions
+
 assignBombs(theGrid);
 assignNb(theGrid)
 console.log(actualizeGrid(theGrid));
 
+promptUser();
 
-//instatiate a readline instance
-let rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 
 function promptUser() {
@@ -26,7 +30,7 @@ function promptUser() {
           console.log(`you picked ${ans}, pick a new tile`);
           console.log(actualizeGrid(theGrid));
           turnCount++;
-          if (turnCount === 71) terminate();  
+          if (turnCount === 71) terminate();
           promptUser()
         })();
       }
@@ -72,6 +76,7 @@ function makeGrid() {
   return grid;
 }
 
+//formats board from grid position array: theGrid
 function actualizeGrid(arr) {
   let str = ''
   for (let i = 0; i < arr.length; i++) {
@@ -91,7 +96,7 @@ function terminate(str = 'win') {
   })() : (() => {
     console.log('You Win!')
   })()
-  
+
 }
 
 //assigns bombs
@@ -125,4 +130,3 @@ function checkNb(tile) {
   tile.nbCount = bombCount;
 }
 
-promptUser();
